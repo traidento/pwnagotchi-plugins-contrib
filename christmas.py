@@ -16,7 +16,7 @@ class Christmas(plugins.Plugin):
     __description__ = 'Christmas Countdown timer for pwnagotchi'
 
     def on_loaded(self):
-        logging.info("Christmas Plugin loaded.")
+        logging.info("[christmas] loaded.")
 
     def on_ui_setup(self, ui):
         memenable = False
@@ -27,7 +27,7 @@ class Christmas(plugins.Plugin):
                 if 'enabled' in data["main"]["plugins"]["memtemp"]:
                     if data["main"]["plugins"]["memtemp"]["enabled"]:
                         memenable = True
-                        logging.info("Christmas Plugin: memtemp is enabled")
+                        logging.info("[christmas] memtemp is enabled")
         if ui.is_waveshare_v2():
             pos = (130, 80) if memenable else (200, 80)
             ui.add_element('christmas', LabeledValue(color=BLACK, label='', value='christmas\n',

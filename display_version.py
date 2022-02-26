@@ -8,12 +8,12 @@ import logging
 
 class PwnagotchiVersion(plugins.Plugin):
     __author__ = 'https://github.com/Teraskull/'
-    __version__ = '1.0.0'
+    __version__ = '1.0.1'
     __license__ = 'GPL3'
     __description__ = 'A plugin that will add the Pwnagotchi version to the left of the current mode.'
 
     def on_loaded(self):
-        logging.info('Pwnagotchi Version Plugin loaded.')
+        logging.info('[display_version] Plugin loaded.')
 
     def on_ui_setup(self, ui):
         ui.add_element(
@@ -30,3 +30,7 @@ class PwnagotchiVersion(plugins.Plugin):
 
     def on_ui_update(self, ui):
         ui.set('version', f'v{pwnagotchi.__version__}')
+
+    def on_unload(self, ui):
+        with ui._lock:
+            ui.remove_element("version")

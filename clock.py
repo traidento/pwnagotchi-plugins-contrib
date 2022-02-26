@@ -30,7 +30,7 @@ class PwnClock(plugins.Plugin):
         else:
             self.time_format = "%I:%M %p"
 
-        logging.info("Pwnagotchi Clock Plugin loaded.")
+        logging.info("[clock] Plugin loaded.")
 
     def on_ui_setup(self, ui):
         memenable = False
@@ -46,9 +46,9 @@ class PwnClock(plugins.Plugin):
                     if data["main"]["plugins"]["memtemp"]["enabled"]:
                         memenable = True
                         logging.info(
-                            "Pwnagotchi Clock Plugin: memtemp is enabled")
+                            "[clock] memtemp is enabled")
         if ui.is_waveshare_v2():
-            pos = (130, 80) if memenable else (200, 80)
+            pos = (130, 84) if memenable else (200, 84)
             ui.add_element('clock', LabeledValue(color=BLACK, label='', value='-/-/-\n-:--',
                                                  position=pos,
                                                  label_font=fonts.Small, text_font=fonts.Small))

@@ -75,7 +75,7 @@ class HandshakesDL(plugins.Plugin):
         self.ready = False
 
     def on_loaded(self):
-        logging.info("[HandshakesDL] plugin loaded")
+        logging.info("[handshakes_dl] plugin loaded")
 
     def on_config_changed(self, config):
         self.config = config
@@ -95,7 +95,7 @@ class HandshakesDL(plugins.Plugin):
         else:
             dir = self.config['bettercap']['handshakes']
             try:
-                logging.info(f"[HandshakesDL] serving {dir}/{path}.pcap")
+                logging.info(f"[handshakes_dl] serving {dir}/{path}.pcap")
                 return send_from_directory(directory=dir, filename=path+'.pcap', as_attachment=True)
             except FileNotFoundError:
                 abort(404)

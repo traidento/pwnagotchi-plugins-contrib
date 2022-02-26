@@ -14,17 +14,17 @@ class GPIOShutdown(plugins.Plugin):
 
 
     def shutdown(self, channel):
-        logging.warning('Received shutdown command from GPIO')
+        logging.warning('[gpio_shutdown] Received shutdown command from GPIO')
         pwnagotchi.shutdown()
 
 
     def on_loaded(self):
 
-        logging.info('GPIO Shutdown plugin loaded')
+        logging.info('[gpio_shutdown] GPIO Shutdown plugin loaded')
 
         shutdown_gpio = self.options['gpio']
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(shutdown_gpio, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(shutdown_gpio, GPIO.FALLING, callback = self.shutdown)
 
-        logging.info("Added shutdown command to GPIO %d", shutdown_gpio)
+        logging.info("[gpio_shutdown] Added shutdown command to GPIO %d", shutdown_gpio)

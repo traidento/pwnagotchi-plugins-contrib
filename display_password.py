@@ -23,7 +23,7 @@ class DisplayPassword(plugins.Plugin):
     __description__ = 'A plugin to display recently cracked passwords'
 
     def on_loaded(self):
-        logging.info("display-password loaded")
+        logging.info("[display_password] loaded")
 
     def on_ui_setup(self, ui):
         if ui.is_waveshare_v2():

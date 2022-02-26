@@ -388,7 +388,7 @@ class PiSugar(plugins.Plugin):
 
     def on_loaded(self):
         self.ps = PiSugar2()
-        logging.info("[pisugar2] plugin loaded.")
+        logging.info("[pisugar] plugin loaded.")
 
         if self.ps.get_battery_led_amount().value == 2:
             self.is_new_model = True
@@ -447,7 +447,7 @@ class PiSugar(plugins.Plugin):
 
         if capacity <= self.options["shutdown"]:
             logging.info(
-                f"[pisugar2] Empty battery (<= {self.options['shutdown']}): shuting down"
+                f"[pisugar] Empty battery (<= {self.options['shutdown']}): shuting down"
             )
             ui.update(force=True, new_data={"status": "Battery exhausted, bye ..."})
             time.sleep(3)
