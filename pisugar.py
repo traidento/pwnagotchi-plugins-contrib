@@ -410,24 +410,10 @@ class PiSugar(plugins.Plugin):
                 text_font=fonts.Medium,
             ),
         )
-        # display charging status
-        if self.is_new_model:
-            ui.add_element(
-                "chg",
-                LabeledValue(
-                    color=BLACK,
-                    label="",
-                    value="",
-                    position=(ui.width() / 2 - 12, 0),
-                    label_font=fonts.Bold,
-                    text_font=fonts.Bold,
-                ),
-            )
 
     def on_unload(self, ui):
         with ui._lock:
             ui.remove_element("bat")
-            ui.remove_element("chg")
 
     def on_ui_update(self, ui):
         capacity = int(self.ps.get_battery_percentage().value)
@@ -435,15 +421,13 @@ class PiSugar(plugins.Plugin):
         # new model use battery_power_plugged & battery_allow_charging to detect real charging status
         if self.is_new_model:
             if self.ps.get_battery_power_plugged().value and self.ps.get_battery_allow_charging().value:
-                ui.set("chg", "CHG")
                 if not self.is_charging:
                     ui.update(force=True, new_data={"status": "Power!! I can feel it!"})
                 self.is_charging = True
             else:
-                ui.set("chg", "")
                 self.is_charging = False
 
-        ui.set("bat", str(capacity) + "%")
+        ui.set("bat", str(capacity) + ("+" if self.is_charging else "%"))
 
         if capacity <= self.options["shutdown"]:
             logging.info(
